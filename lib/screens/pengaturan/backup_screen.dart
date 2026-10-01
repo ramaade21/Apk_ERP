@@ -1,4 +1,4 @@
-import 'package:file_picker/file_picker.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -42,10 +42,8 @@ class _BackupScreenState extends State<BackupScreen> {
   }
 
   Future<void> _restore() async {
-    final result = await FilePicker.pickFiles(type: FileType.any);
-    final path = (result == null || result.files.isEmpty)
-        ? null
-        : result.files.first.path;
+    final picked = await openFile();
+    final path = picked?.path;
     if (path == null) return;
     if (!mounted) return;
 
